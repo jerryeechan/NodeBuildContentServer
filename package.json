@@ -1,0 +1,14 @@
+{
+  "name": "nodebuildcontentserver",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js C://testpath C://test_install_bashapth"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "param1: build content folder path, param2: install bash file path",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
+}
