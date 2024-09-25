@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js C://testpath C://test_install_bashapth"
+    "gitlab-runner": "", 
+    "start": "node index.js C:/CloudBuildsTemp/NineSols C:/Users/User/cloudbuildscripts/NineSols/asus-nuc-pro/install_xbox_all.sh"
   },
   "author": "",
   "license": "ISC",

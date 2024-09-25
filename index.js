@@ -16,14 +16,18 @@ const staticServer = httpServer.createServer({
   cors: true, // Enable CORS if needed
 });
 
-// Start the static file server on a separate port (e.g., 8080)
-staticServer.listen(8087, () => {
-  console.log("Static file server running at http://localhost:8087");
+// Start the static file server on a separate port (e.g., 8080;
+const port = 8080;
+staticServer.listen(port, () => {
+  console.log("Static file server running at http://localhost:"+port);
 });
 
 // Create a custom HTTP server to handle requests and run bash scripts
 const server = http.createServer((req, res) => {
+  console.log("get request"+req.url);
   if (req.method === "GET" && req.url === "/install_xbox") {
+    
+    
     // Optional: collect request body data if needed
     let body = "";
     req.on("data", (chunk) => {
