@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "gitlab-runner": "", 
+    "gitlab-runner": "",
     "start": "node index.js C:/CloudBuildsTemp/NineSols C:/Users/User/cloudbuildscripts/NineSols/asus-nuc-pro/install_xbox_all.sh"
   },
   "author": "",
   "license": "ISC",
   "description": "param1: build content folder path, param2: install bash file path",
   "dependencies": {
-    "http-server": "^14.1.1"
+    "http-server": "^14.1.1",
+    "shelljs": "^0.8.5"
   }
 }

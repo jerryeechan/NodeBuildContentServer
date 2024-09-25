@@ -1,5 +1,6 @@
 // Import the necessary modules
 const http = require("http");
+const shell = require('shelljs'); //第一次會跳窗喔!
 const { exec } = require("child_process");
 const httpServer = require("http-server");
 
@@ -35,29 +36,38 @@ const server = http.createServer((req, res) => {
     });
 
     req.on("end", () => {
+      console.log("install xbox start:"+install_bash_path);
+      
       // Trigger the bash file execution
-      exec(install_bash_path, (error, stdout, stderr) => {
-        if (error) {
-          console.error(`Error executing bash script: ${error.message}`);
-          res.writeHead(500, { "Content-Type": "text/plain" });
-          res.end(`Error: ${error.message}`);
-          return;
-        }
+      if (shell.exec(install_bash_path).code !== 0) {
+        shell.echo('Error: Shell script execution failed');
+        shell.exit(1);
+      }
+      // exec("sh "+install_bash_path, {
+      //   env: { PATH: 'C:\\Program Files\\git\\usr\\bin' },
+      //   shell: 'C:\\Program Files\\git\\usr\\bin\\bash.exe'
+      // }, (error, stdout, stderr) => {
+      //   if (error) {
+      //     console.error(`Error executing bash script: ${error.message}`);
+      //     res.writeHead(500, { "Content-Type": "text/plain" });
+      //     res.end(`Error: ${error.message}`);
+      //     return;
+      //   }
 
-        if (stderr) {
-          console.error(`Bash script stderr: ${stderr}`);
-          res.writeHead(500, { "Content-Type": "text/plain" });
-          res.end(`Error: ${stderr}`);
-          return;
-        }
+      //   if (stderr) {
+      //     console.error(`Bash script stderr: ${stderr}`);
+      //     res.writeHead(500, { "Content-Type": "text/plain" });
+      //     res.end(`Error: ${stderr}`);
+      //     return;
+      //   }
 
-        // Output from the bash script
-        console.log(`Bash script output: ${stdout}`);
+      //   // Output from the bash script
+      //   console.log(`Bash script output: ${stdout}`);
 
-        // Send a success response
-        res.writeHead(200, { "Content-Type": "text/plain" });
-        res.end(`Success: ${stdout}`);
-      });
+      //   // Send a success response
+      //   res.writeHead(200, { "Content-Type": "text/plain" });
+      //   res.end(`Success: ${stdout}`);
+      // });
     });
   } else {
     res.writeHead(404, { "Content-Type": "text/plain" });
