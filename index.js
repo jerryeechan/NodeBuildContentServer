@@ -1,6 +1,6 @@
 // Import the necessary modules
 const http = require("http");
-const shell = require('shelljs'); //²Ä¤@¦¸·|¸õµ¡³á!
+const shell = require("shelljs"); //ï¿½Ä¤@ï¿½ï¿½ï¿½|ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!
 const { exec } = require("child_process");
 const httpServer = require("http-server");
 
@@ -20,15 +20,13 @@ const staticServer = httpServer.createServer({
 // Start the static file server on a separate port (e.g., 8080;
 const port = 8080;
 staticServer.listen(port, () => {
-  console.log("Static file server running at http://localhost:"+port);
+  console.log("Static file server running at http://localhost:" + port);
 });
 
 // Create a custom HTTP server to handle requests and run bash scripts
 const server = http.createServer((req, res) => {
-  console.log("get request"+req.url);
+  console.log("get request" + req.url);
   if (req.method === "GET" && req.url === "/install_xbox") {
-    
-    
     // Optional: collect request body data if needed
     let body = "";
     req.on("data", (chunk) => {
@@ -36,11 +34,12 @@ const server = http.createServer((req, res) => {
     });
 
     req.on("end", () => {
-      console.log("install xbox start:"+install_bash_path);
-      
+      if (install_bash_path == null) return;
+      console.log("install xbox start:" + install_bash_path);
+
       // Trigger the bash file execution
       if (shell.exec(install_bash_path).code !== 0) {
-        shell.echo('Error: Shell script execution failed');
+        shell.echo("Error: Shell script execution failed");
         shell.exit(1);
       }
       // exec("sh "+install_bash_path, {
